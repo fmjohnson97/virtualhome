@@ -6,8 +6,8 @@ from tqdm import tqdm
 class ScriptData(Dataset):
     def __init__(self, scene_id,makeList=False):
         self.makeList=makeList
-        # self.exeFiles=glob('dataset/programs_processed_precond_nograb_morepreconds/executable_programs/TrimmedTestScene'+str(scene_id)+'_graph/results_intentions_march-13-18/*.txt', recursive=True)
-        self.exeFiles=pd.read_csv('walkProgs_'+str(scene_id)+'.csv',index_col=0, header=0)['0'].tolist()
+        self.exeFiles=glob('dataset/programs_processed_precond_nograb_morepreconds/executable_programs/TrimmedTestScene'+str(scene_id)+'_graph/results_intentions_march-13-18/*.txt', recursive=True)
+        # self.exeFiles=pd.read_csv('walkProgs_'+str(scene_id)+'.csv',index_col=0, header=0)['0'].tolist()
         self.initFinGraph=glob('dataset/programs_processed_precond_nograb_morepreconds/init_and_final_graphs/TrimmedTestScene'+str(scene_id)+'_graph/results_intentions_march-13-18/*.json', recursive=True)
         self.files=[]
         self.scene_id=scene_id

@@ -28,6 +28,7 @@ class UnityEnvironment(BaseEnvironment):
                  base_port=8080,
                  port_id=0,
                  executable_args={},
+                 env_id=np.random.choice([0,1,2,3,4,5,6]),
                  recording_options={'recording': False, 
                                     'output_folder': None, 
                                     'file_name_prefix': None,
@@ -43,7 +44,7 @@ class UnityEnvironment(BaseEnvironment):
 
 
         self.steps = 0
-        self.env_id = None
+        self.env_id = env_id
         self.max_ids = {}
 
 
@@ -162,6 +163,7 @@ class UnityEnvironment(BaseEnvironment):
         :param environment_id: which id to start
         :param init_rooms: where to intialize the agents
         """
+        # import pdb; pdb.set_trace()
         self.env_id = environment_id
         print("Resetting env", self.env_id)
 
@@ -256,7 +258,7 @@ class UnityEnvironment(BaseEnvironment):
             # Only objects in the field of view of the agent
             raise NotImplementedError
 
-        elif obs_type == 'image':
+        elif obs_type in ['normal','seg_inst', 'seg_class', 'depth', 'flow']:
             camera_ids = [self.num_static_cameras + agent_id * self.num_camera_per_agent + self.CAMERA_NUM]
             if 'image_width' in info:
                 image_width = info['image_width']
