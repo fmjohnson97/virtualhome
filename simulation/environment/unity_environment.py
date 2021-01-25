@@ -122,6 +122,7 @@ class UnityEnvironment(BaseEnvironment):
         return reward, done, info
 
     def step(self, action_dict):
+        # import pdb; pdb.set_trace()
         script_list = utils_environment.convert_action(action_dict)
         if len(script_list[0]) > 0:
             if self.recording_options['recording']:
@@ -150,7 +151,8 @@ class UnityEnvironment(BaseEnvironment):
         
         obs = self.get_observations()
         
-
+        info['success']=success
+        info['message']=message
         info['finished'] = done
         info['graph'] = graph
         if self.steps == self.max_episode_length:
@@ -236,7 +238,7 @@ class UnityEnvironment(BaseEnvironment):
     def get_action_space(self):
         dict_action_space = {}
         for agent_id in range(self.num_agents):
-            if self.observation_types[agent_id] not in ['partial', 'full']:
+            if self.observation_types[agent_id] not in ['partial', 'full','normal','seg_inst', 'seg_class', 'depth', 'flow']:
                 raise NotImplementedError
             else:
                 # Even if you can see all the graph, you can only interact with visible objects
@@ -246,7 +248,9 @@ class UnityEnvironment(BaseEnvironment):
         return dict_action_space
 
     def get_observation(self, agent_id, obs_type, info={}):
-        if obs_type == 'partial':
+        if obs_type is None:
+            return None
+        elif obs_type == 'partial':
             # agent 0 has id (0 + 1)
             curr_graph = self.get_graph()
             return utils.get_visible_nodes(curr_graph, agent_id=(agent_id+1))
