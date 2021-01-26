@@ -115,59 +115,6 @@ python generate_snapshots.py
 ```
 A grid of snapshots for the given script will be generated and saved in [demo/snapshot_test.png](demo/snapshot_test.png).
 
-## Dataset
-
-We collected a dataset of programs and augmented them with graphs using the Evolving Graph simulator. You can download them [here](http://virtual-home.org/release/programs/programs_processed_precond_nograb_morepreconds.zip). 
-Once downloaded and unzipped, move the programs into the `dataset` folder. You can do all this by executing the script
-```bash
-./helper_scripts/download_dataset.sh
-```
-The dataset should follow the following structure:
-
-```
-dataset
-└── programs_processed_precond_nograb_morepreconds
-	|── initstate
-	├── withoutconds
-	├── executable_programs
-	|   ├── TrimmedTestScene7_graph
-	|	└── ...
-	└── state_list
-		├── TrimmedTestScene7_graph
-	   	└── ...	
-```
-
-The folders `withoutconds` and `initstate` contain the original programs and pre-conditions. 
-
-When a script is executed in an environment, the script changes by aligning the original objects with instances in the environment. You can view the resulting script in `executable_programs/{environment}/{script_name}.txt`.
-
-To view the graph of the environment, and how it changes throughout the script execution of a program, check   `state_list/{environment}/{script_name}.json`.
-
-You can find more details of the programs and environment graphs in [dataset/README.md](dataset/README.md).
-
-### Script Augmentation
-
-
-In *Synthesizing Environment-Aware Activities via Activity Sketches*, 
-we augment the scripts with two knowledge bases: `KB-RealEnv` and `KB-ExceptonHandler`.
-You can download the augmented scripts in [KB-RealEnv](http://virtual-home.org/release/programs/augment_location.zip) and [KB-ExceptionHandler](http://virtual-home.org/release/programs/augment_exception.zip).
-
-Here, we provide the code to augment the sripts:
-
-#### Augment with `KB-RealEnv`
-
-```bash
-cd dataset_utils
-python augment_dataset_locations.py
-```
-
-
-#### Augment with `KB-ExceptionHandler`
-
-```bash
-cd dataset_utils
-python augment_dataset_exceptions.py
-```
 
 ### Resources
 
