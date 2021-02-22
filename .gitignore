@@ -18,4 +18,10 @@ pip-delete-this-directory.txt
 /dataset/augment_exception
 /dataset/augment_location
 /dataset/programs_processed_precond_nograb_morepreconds
-/simulation/unity_simulator/linux_exec/
+/simulation/unity_simulator/
+
+# random artifacts from old virtualhome
+.idea/
+
+# HRL/HIL code from https://github.com/hoangminhle/hierarchical_IL_RL
+hierarchical_IL_RL/
