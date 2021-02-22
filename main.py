@@ -9,6 +9,7 @@ from demo.utils_demo import *
 from rl_utils import *
 import random
 from simulation.environment import utils as utils_environment
+from hierarchical_IL_RL.agents import Manager, Worker
 
 ''' Set global script variables'''
 scene_ids=[0,1,2,3,4,5,6] #ToDo: Env 2 might be broken!!!
@@ -31,7 +32,11 @@ env=UnityEnvironment(env_id=random.choice(scene_ids),
     self.agent_info
 '''
 
-''' Go through each scene from the dataloader'''
+manager=Manager(in_chan=,out_actions=)
+worker=Worker(in_chan=, out_actions=)
+
+
+''' Go through each epoch'''
 for e in range(total_epochs):
     print('Epoch:',e)
     env.reset(environment_id=random.choice(scene_ids))
@@ -40,8 +45,8 @@ for e in range(total_epochs):
     location, loc_id = random.choice(destinations)
     destinations.pop(destinations.index((location,loc_id)))
     for step in range(epoch_length):
-        # import pdb; pdb.set_trace()
-        obs=env.get_observations()
+        import pdb; pdb.set_trace()
+        # obs=env.get_observations()
         #obs[1] is the input for the 1st person POV image from the following agent
 
         curr_graph = env.get_graph()
