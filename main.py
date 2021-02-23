@@ -32,8 +32,9 @@ env=UnityEnvironment(env_id=random.choice(scene_ids),
     self.agent_info
 '''
 
-manager=Manager(in_chan=,out_actions=)
-worker=Worker(in_chan=, out_actions=)
+#actions are ['turnleft', 'walkforward', 'turnright', 'no_action']
+manager=Manager(in_chan=3,out_actions=4)#will probably need to change out actions here
+worker=Worker(in_chan=3, out_actions=4)
 
 
 ''' Go through each epoch'''
@@ -46,8 +47,10 @@ for e in range(total_epochs):
     destinations.pop(destinations.index((location,loc_id)))
     for step in range(epoch_length):
         import pdb; pdb.set_trace()
-        # obs=env.get_observations()
+        obs=env.get_observations()
         #obs[1] is the input for the 1st person POV image from the following agent
+        x=manager(torch.FloatTensor(obs[1]).T.unsqueeze(0))
+        x2=worker(torch.FloatTensor(obs[1]).T.unsqueeze(0))
 
         curr_graph = env.get_graph()
         agentids = [2]
